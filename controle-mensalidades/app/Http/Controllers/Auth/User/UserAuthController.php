@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers\Auth\User;
 
-use App\Enum\Auth\EnumUserAuth;
-use App\Enum\Standard\EnumStandard;
+use App\Http\Controllers\Auth\User\Interface\VariableAuthController;
 use App\Http\Controllers\Controller;
+use App\Messages\User\MessageUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class UserAuthController extends Controller
+class UserAuthController extends Controller implements VariableAuthController
 {
     public function login(Request $request): JsonResponse
     {
-        $credentials = $request->only(EnumUserAuth::USERNAME, EnumUserAuth::PASSWORD);
+        $credentials = $request->only(self::USERNAME, self::PASSWORD);
 
         try {
-            if (!$token = auth(EnumUserAuth::API)->attempt($credentials)) {
-                return response()->json([EnumStandard::ERROR => 'Test'], 401);
+            if (!$token = auth(self::API)->attempt($credentials)) {
+                return response()->json([self::ERROR => MessageUser::USR0001], 401);
             }
         } catch (JWTException $e) {
-            return response()->json([EnumStandard::ERROR => 'Test'], 500);
+            return response()->json([self::ERROR => MessageUser::USR0001], 500);
         }
 
         return response()->json($token);
@@ -28,9 +29,9 @@ class UserAuthController extends Controller
     public function me(): JsonResponse
     {
         try {
-            $user = auth(EnumUserAuth::API)->user();
+            $user = auth(self::API)->user();
         } catch (JWTException $e) {
-            return response()->json([EnumStandard::ERROR => 'Test'], 500);
+            return response()->json([self::ERROR => MessageUser::USR0001], 500);
         }
 
         return response()->json($user);
@@ -39,11 +40,11 @@ class UserAuthController extends Controller
     public function logout(): JsonResponse
     {
         try {
-            auth(EnumUserAuth::API)->logout();
+            auth(self::API)->logout();
         } catch (JWTException $e) {
-            return response()->json([EnumStandard::ERROR => 'Test'], 500);
+            return response()->json([self::ERROR => MessageUser::USR0001], 500);
         }
 
-        return response()->json([EnumStandard::MESSAGE => 'Test']);
+        return response()->json([self::MESSAGE => MessageUser::USR0001]);
     }
 }
