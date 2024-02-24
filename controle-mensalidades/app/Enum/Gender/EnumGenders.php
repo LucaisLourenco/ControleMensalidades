@@ -7,10 +7,7 @@ use App\Models\Gender\Gender;
 
 enum EnumGenders
 {
-    const MASCULINO = 1;public function getId()
-    {
-        return $this->id;
-    }
+    const MASCULINO = 1;
     const FEMININO = 2;
     const OUTROS = 3;
 

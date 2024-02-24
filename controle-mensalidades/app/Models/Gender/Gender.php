@@ -17,13 +17,8 @@ class Gender extends Model
 
     protected $fillable = ['name'];
 
-    public function getId()
+    public function insertIfDoesNotExist()
     {
-        return $this->id;
-    }
-
-    public function getName()
-    {
-        return $this->name;
+        return static::firstOrCreate($this->getAttributes());
     }
 }
