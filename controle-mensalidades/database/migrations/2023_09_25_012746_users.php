@@ -36,7 +36,7 @@ return new class extends Migration
             $table->unsignedBigInteger(static::$idGender);
             $table->foreign(static::$idGender)->references(static::$onColumnGenders)->on(static::$asTableGenders);
             $table->string(static::$email)->unique();
-            $table->date(static::$birth);
+            $table->date(static::$birth)->nullable();
             $table->timestamp(static::$emailVerifiedAt)->nullable();
             $table->string(static::$password);
             $table->integer(static::$active);
