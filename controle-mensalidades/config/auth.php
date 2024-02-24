@@ -70,7 +70,7 @@ return [
         ],
 //        'tutors' => [
 //            'driver' => 'eloquent',
-//            'model' => \App\Models\Cliente\Tutor::class,
+//            'model' => \Standard\Models\Cliente\Tutor::class,
 //        ],
 
         // 'users' => [

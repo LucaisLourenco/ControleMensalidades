@@ -29,11 +29,11 @@ class User extends Authenticatable implements JWTSubject
     ];
 
 //    public function role() {
-//        return $this->belongsTo('App\Models\Papel\Role')->withTrashed();
+//        return $this->belongsTo('Standard\Models\Papel\Role')->withTrashed();
 //    }
 //
 //    public function gender() {
-//        return $this->belongsTo('App\Models\Genero\Gender')->withTrashed();
+//        return $this->belongsTo('Standard\Models\Genero\Gender')->withTrashed();
 //    }
 
     protected $hidden = [
