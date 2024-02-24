@@ -21,8 +21,8 @@ return new class extends Migration
     public static string $idGender = 'gender_id';
     public static string $asTableRoles = 'roles';
     public static string $asTableGenders = 'genders';
-    public static string $asColumnRoles = 'id';
-    public static string $asColumnGenders = 'id';
+    public static string $onColumnRoles = 'id';
+    public static string $onColumnGenders = 'id';
 
     public function up(): void
     {
@@ -32,9 +32,9 @@ return new class extends Migration
             $table->string(static::$username)->unique();
             $table->string(static::$cpf)->unique();
             $table->unsignedBigInteger(static::$idRole);
-            $table->foreign(static::$idRole)->references(static::$asColumnRoles)->on(static::$asTableRoles);
+            $table->foreign(static::$idRole)->references(static::$onColumnRoles)->on(static::$asTableRoles);
             $table->unsignedBigInteger(static::$idGender);
-            $table->foreign(static::$idGender)->references(static::$asColumnGenders)->on(static::$asTableGenders);
+            $table->foreign(static::$idGender)->references(static::$onColumnGenders)->on(static::$asTableGenders);
             $table->string(static::$email)->unique();
             $table->date(static::$birth);
             $table->timestamp(static::$emailVerifiedAt)->nullable();

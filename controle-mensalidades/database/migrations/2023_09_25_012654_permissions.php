@@ -14,17 +14,17 @@ return new class extends Migration
     public static string $permission = 'permission';
     public static string $asTableRoles = 'roles';
     public static string $asTableResource = 'resources';
-    public static string $asColumnRoles = 'id';
-    public static string $asColumnResource = 'id';
+    public static string $onColumnRoles = 'id';
+    public static string $onColumnResource = 'id';
 
     public function up(): void
     {
         Schema::create(self::TABLE, function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger(static::$idRole);
-            $table->foreign(static::$idRole)->references(static::$asColumnRoles)->on(static::$asTableRoles);
+            $table->foreign(static::$idRole)->references(static::$onColumnRoles)->on(static::$asTableRoles);
             $table->unsignedBigInteger(static::$idResource);
-            $table->foreign(static::$idResource)->references(static::$asColumnResource)->on(static::$asTableResource);
+            $table->foreign(static::$idResource)->references(static::$onColumnResource)->on(static::$asTableResource);
             $table->boolean(static::$permission);
             $table->softDeletes();
             $table->timestamps();
