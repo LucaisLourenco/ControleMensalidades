@@ -11,7 +11,7 @@ class DataBaseSeederGenders extends Seeder
     public function run(): void
     {
         foreach (EnumGenders::getArray() as $gender) {
-            if ($gender instanceof Gender) {
+            if ($gender instanceof Gender && !Gender::find($gender->getId())) {
                 $gender->save();
             }
         }
