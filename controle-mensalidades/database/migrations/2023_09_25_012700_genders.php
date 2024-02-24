@@ -6,24 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    const TABLE = 'genders';
+
+    static string $name = 'name';
+
     public function up(): void
     {
-        Schema::create('genders', function (Blueprint $table) {
+        Schema::create(self::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string(static::$name);
             $table->softDeletes();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('genders');
+        Schema::dropIfExists(self::TABLE);
     }
 };

@@ -6,36 +6,48 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    const TABLE = 'users';
+
+    public static string $id = 'id';
+    public static string $name = 'name';
+    public static string $username = 'username';
+    public static string $cpf = 'cpf';
+    public static string $email = 'email';
+    public static string $birth = 'birth';
+    public static string $emailVerifiedAt = 'email_verified_at';
+    public static string $active = 'active';
+    public static string $password = 'password';
+    public static string $idRole = 'role_id';
+    public static string $idGender = 'gender_id';
+    public static string $asTableRoles = 'roles';
+    public static string $asTableGenders = 'genders';
+    public static string $asColumnRoles = 'id';
+    public static string $asColumnGenders = 'id';
+
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create(self::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('cpf')->unique();
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->unsignedBigInteger('gender_id');
-            $table->foreign('gender_id')->references('id')->on('genders');
-            $table->string('email')->unique();
-            $table->date('birth');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->integer('active');
+            $table->string(static::$name);
+            $table->string(static::$username)->unique();
+            $table->string(static::$cpf)->unique();
+            $table->unsignedBigInteger(static::$idRole);
+            $table->foreign(static::$idRole)->references(static::$asColumnRoles)->on(static::$asTableRoles);
+            $table->unsignedBigInteger(static::$idGender);
+            $table->foreign(static::$idGender)->references(static::$asColumnGenders)->on(static::$asTableGenders);
+            $table->string(static::$email)->unique();
+            $table->date(static::$birth);
+            $table->timestamp(static::$emailVerifiedAt)->nullable();
+            $table->string(static::$password);
+            $table->integer(static::$active);
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        //
+        Schema::dropIfExists(self::TABLE);
     }
 };
