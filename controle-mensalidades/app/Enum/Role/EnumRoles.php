@@ -3,7 +3,6 @@
 namespace App\Enum\Role;
 
 use App\Enum\Label\EnumRotuloPadrao;
-use App\Models\Gender\Gender;
 use App\Models\Role\Role;
 
 enum EnumRoles

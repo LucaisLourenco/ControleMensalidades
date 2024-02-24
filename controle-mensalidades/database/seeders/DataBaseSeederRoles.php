@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Enum\Role\EnumRoles;
-use App\Models\Gender\Gender;
 use App\Models\Role\Role;
 use Illuminate\Database\Seeder;
 
